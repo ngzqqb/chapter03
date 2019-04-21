@@ -17,11 +17,11 @@ namespace sstd {
                 varIndex < arg;
                 ++varIndex, ++varPoint, varAngle -= varStep) {
                 varPoint->set(
-                    static_cast<GLfloat>(std::sin(varAngle)),
-                    static_cast<GLfloat>(std::cos(varAngle)));
+                    static_cast<GLfloat>(std::cos(varAngle)),
+                    static_cast<GLfloat>(std::sin(varAngle)));
             }
-            varPoint->set(varFirstPoint->x,varFirstPoint->y);
-            this->setDrawingMode(GL_TRIANGLE_FAN);
+            varPoint->set(varFirstPoint->x, varFirstPoint->y);
+            this->setDrawingMode(QSGGeometry::DrawTriangleFan);
         }
     private:
         sstd_class(TheQSGGeometry);
