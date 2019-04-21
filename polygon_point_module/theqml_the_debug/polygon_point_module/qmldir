@@ -1,0 +1,4 @@
+module theqml_the_debug.polygon_point_module
+plugin polygon_point_module
+typeinfo plugins.qmltypes
+#classname sstd::TheMoudle
