@@ -10,6 +10,15 @@ HEADERS += $$PWD/the_moudle.hpp
 SOURCES += $$PWD/Empty.cpp
 HEADERS += $$PWD/Empty.hpp
 
+SOURCES += $$PWD/Static.cpp
+HEADERS += $$PWD/Static.hpp
+
+SOURCES += $$PWD/PolygonPoint.cpp
+HEADERS += $$PWD/PolygonPoint.hpp
+
+SOURCES += $$PWD/PolygonPointNode.cpp
+HEADERS += $$PWD/PolygonPointNode.hpp
+
 include($$PWD/../../sstd_library/sstd_library.pri)
 include($$PWD/../../sstd_qt_qml_quick_library/sstd_qt_qml_quick_library.pri)
 
