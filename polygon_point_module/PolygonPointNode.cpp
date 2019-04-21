@@ -50,10 +50,9 @@ namespace sstd {
             auto varCenter = thisData->getCenter();
 
             QMatrix4x4 varMatrix;
-            varMatrix.translate(
-                varRadius.first*0.5  ,
-                varRadius.second*0.5  );
-            varMatrix.scale(varRadius.first*0.5, -varRadius.second*0.5);
+            varMatrix.translate(varRadius.first* 0.5, varRadius.second* 0.5);
+            varMatrix.scale(varRadius.first*0.5, -0.5*varRadius.second);
+            varMatrix.translate(varCenter.x(), varCenter.y());
 
             this->setMatrix(varMatrix);
             this->markDirty(DirtyMatrix);

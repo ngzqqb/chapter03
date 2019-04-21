@@ -14,11 +14,34 @@ ApplicationWindow {
 
     PolygonPoint{
         anchors.centerIn: parent
+        width: parent.width
+        height: parent.height
+
+        polygonSize: 4
+        polygonColor: Qt.rgba(0.8,0.3,0.4,1)
+        polygonCenter: Qt.point(0.0,0.0)
+
+    }
+
+    PolygonPoint{
+        anchors.centerIn: parent
         width: parent.width*0.8
         height: parent.height*0.8
 
         polygonSize: 4
-        polygonColor: Qt.rgba(0.8,0.3,0.4,1)
+        polygonColor: Qt.rgba(0.4,0.3,0.8,1)
+        polygonCenter: Qt.point(0.0,0.0)
+
+    }
+
+    PolygonPoint{
+        anchors.centerIn: parent
+        width: parent.width*0.1
+        height: parent.height*0.1
+
+        polygonSize: Static.roundPointPolygonSize()
+        polygonColor: Qt.rgba(0.3,0.8,0.4,1)
+        polygonCenter: Qt.point(0.0,0.0)
 
     }
 
