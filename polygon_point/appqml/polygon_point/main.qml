@@ -47,6 +47,32 @@ ApplicationWindow {
 
     }
 
+    PolygonPoint{
+
+        width: 32
+        height: 32
+        x : 200
+        y : 200
+
+        polygonSize: 3
+        polygonColor: Qt.rgba(0.6,0.9,0.7,1)
+        polygonCenter: Qt.point(0.0,0.0)
+
+        Timer{
+            interval: 500;
+            running: true;
+            repeat: true
+            onTriggered: {
+                if( parent.polygonSize < 8 ){
+                    parent.polygonSize += 1;
+                }else{
+                    parent.polygonSize = 3;
+                }
+            }
+        }
+
+    }
+
 }
 /*endl_input_of_latex_for_clanguage_lick*/
 /*begin:debug*/

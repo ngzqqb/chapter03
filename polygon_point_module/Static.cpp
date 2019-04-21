@@ -2,7 +2,7 @@
 
 namespace sstd {
 
-    constexpr const static inline int globalRoundPointPolyGonSize{ 1024 };
+    constexpr const static inline int globalRoundPointPolyGonSize{ 256 };
 
     class TheQSGGeometry : public QSGGeometry {
     public:
