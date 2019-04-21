@@ -32,10 +32,10 @@ namespace sstd{
         inline bool testChanged() const;
     private:
         int thisPolygonSize;
-        double thisWidth;
-        double thisHeight;
         QPointF thisCenter;
         QColor thisColor;
+        double thisWidth;
+        double thisHeight;
         sstd::QuickFlags< PolygonPointNodeDataState::Size > thisFlags;
     private:
         sstd_class(PolygonPointNodeData);

@@ -32,7 +32,7 @@ namespace sstd {
             auto varNode =
                 sstd_new<PolygonPointDrawNode>(varStatic->getPolygon(thisData->getPolygonSize()));
             if (thisDrawNode) {
-                this->removeChildNode(thisDrawNode);
+                delete thisDrawNode;
             }
             thisDrawNode = varNode;
             this->appendChildNode(thisDrawNode);
@@ -50,9 +50,10 @@ namespace sstd {
             auto varCenter = thisData->getCenter();
 
             QMatrix4x4 varMatrix;
-            varMatrix.translate(varRadius.first*0.5, varRadius.second*0.5);
             varMatrix.scale(varRadius.first*0.5, -varRadius.second*0.5);
-            varMatrix.translate(-varCenter.x(), -varCenter.y());
+            varMatrix.translate(
+                varRadius.first*0.5-varCenter.x(), 
+                varRadius.second*0.5-varCenter.y());
 
             this->setMatrix(varMatrix);
             this->markDirty(DirtyMatrix);

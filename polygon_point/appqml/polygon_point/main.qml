@@ -12,6 +12,10 @@ ApplicationWindow {
     height: 64 ;
     visible: true ;
 
+    PolygonPoint{
+
+    }
+
 }
 /*endl_input_of_latex_for_clanguage_lick*/
 /*begin:debug*/
