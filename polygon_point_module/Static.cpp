@@ -22,6 +22,7 @@ namespace sstd {
             }
             varPoint->set(varFirstPoint->x, varFirstPoint->y);
             this->setDrawingMode(QSGGeometry::DrawTriangleFan);
+            this->setVertexDataPattern(QSGGeometry::StaticPattern);
         }
     private:
         sstd_class(TheQSGGeometry);
