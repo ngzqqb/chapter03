@@ -7,19 +7,21 @@ namespace sstd {
     class TheQSGGeometry : public QSGGeometry {
     public:
         inline TheQSGGeometry(int arg) :
-            QSGGeometry(defaultAttributes_Point2D(), 1 + arg) {
+            QSGGeometry(defaultAttributes_Point2D(), 2 + arg) {
             auto varPoint = this->vertexDataAsPoint2D();
             const auto varStep = 2 * sstd::toFloat<sstd::constexpr_float_pi, double>() / arg;
             double varAngle = sstd::toFloat<sstd::constexpr_float_pi, double>() / 2;
             varPoint->set(0, 0);
-            ++varPoint;
+            const auto varFirstPoint = ++varPoint;
             for (int varIndex = 0;
                 varIndex < arg;
-                ++varIndex, ++varPoint, varAngle += varStep) {
+                ++varIndex, ++varPoint, varAngle -= varStep) {
                 varPoint->set(
                     static_cast<GLfloat>(std::sin(varAngle)),
                     static_cast<GLfloat>(std::cos(varAngle)));
             }
+            varPoint->set(varFirstPoint->x,varFirstPoint->y);
+            this->setDrawingMode(GL_TRIANGLE_FAN);
         }
     private:
         sstd_class(TheQSGGeometry);
