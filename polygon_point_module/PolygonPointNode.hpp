@@ -9,6 +9,7 @@ namespace sstd{
         RadiusChanged,
         CenterChanged,
         ColorChanged,
+        LogicalRadiusChanged,
         Size
     };
 
