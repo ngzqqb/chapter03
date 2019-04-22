@@ -23,11 +23,13 @@ namespace sstd{
         inline std::pair<double,double> getRadius() const;
         inline QPointF getCenter() const;
         inline QColor getColor() const;
+        inline double getLogicalRadius() const;
     public:
         bool setPolygonSize(const int &);
         bool setRadius(const double &,const double &);
         bool setCenter(const QPointF &);
         bool setColor(const QColor &);
+        bool setLogicalRadius(const double &);
     public:
         template<PolygonPointNodeDataState>
         inline bool testChanged() const;
@@ -37,6 +39,7 @@ namespace sstd{
         QColor thisColor;
         double thisWidth;
         double thisHeight;
+        double thisLogicalRadius;
         sstd::QuickFlags< PolygonPointNodeDataState::Size > thisFlags;
     private:
         sstd_class(PolygonPointNodeData);
@@ -85,6 +88,10 @@ namespace sstd{
     template<PolygonPointNodeDataState I>
     inline bool PolygonPointNodeData::testChanged() const {
         return thisFlags.test<I>();
+    }
+
+    inline double PolygonPointNodeData::getLogicalRadius() const {
+        return thisLogicalRadius;
     }
 
 }/*namespace sstd*/

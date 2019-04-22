@@ -7,6 +7,7 @@ namespace sstd {
         thisWidth = 1;
         thisHeight = 1;
         thisPolygonSize = 3;
+        thisLogicalRadius = 1;
         thisFlags.setAll();
     }
 
@@ -44,15 +45,26 @@ namespace sstd {
         }
 
         if ((thisData->testChanged< PolygonPointNodeDataState::CenterChanged >()) ||
-            (thisData->testChanged< PolygonPointNodeDataState::RadiusChanged >())) {
+            (thisData->testChanged< PolygonPointNodeDataState::RadiusChanged >()) ||
+            (thisData->testChanged< PolygonPointNodeDataState::LogicalRadiusChanged >())) {
 
             auto varRadius = thisData->getRadius();
             auto varCenter = thisData->getCenter();
+            auto varLogicalRadius = static_cast<GLfloat>(thisData->getLogicalRadius());
+            constexpr const auto varLimit = std::numeric_limits<GLfloat>::epsilon();
 
             QMatrix4x4 varMatrix;
-            varMatrix.translate(varRadius.first* 0.5, varRadius.second* 0.5);
-            varMatrix.scale(varRadius.first*0.5, -0.5*varRadius.second);
-            varMatrix.translate(varCenter.x(), varCenter.y());
+
+            if ((varLogicalRadius < varLimit) ||
+                (varRadius.first < varLimit) ||
+                (varRadius.second < varLimit)) {
+                varMatrix.scale(0, 0, 0);
+            } else {
+                varMatrix.translate(static_cast<GLfloat>(varRadius.first* 0.5), static_cast<GLfloat>(varRadius.second* 0.5));
+                varMatrix.scale(static_cast<GLfloat>(varRadius.first*0.5), static_cast<GLfloat>(-0.5*varRadius.second));
+                varMatrix.translate(static_cast<GLfloat>(varCenter.x()), static_cast<GLfloat>(varCenter.y()));
+                varMatrix.scale(varLogicalRadius, varLogicalRadius);
+            }
 
             this->setMatrix(varMatrix);
             this->markDirty(DirtyMatrix);
@@ -72,6 +84,15 @@ namespace sstd {
         }
         thisPolygonSize = arg;
         thisFlags.set< PolygonPointNodeDataState::SizeChanged >();
+        return true;
+    }
+
+    bool PolygonPointNodeData::setLogicalRadius(const double & arg) {
+        if (arg == thisLogicalRadius) {
+            return false;
+        }
+        thisLogicalRadius = arg;
+        thisFlags.set< PolygonPointNodeDataState::LogicalRadiusChanged >();
         return true;
     }
 

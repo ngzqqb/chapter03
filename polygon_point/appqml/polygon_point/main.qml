@@ -55,8 +55,9 @@ ApplicationWindow {
         y : 200
 
         polygonSize: 3
+        polygonRadius : 0.5
         polygonColor: Qt.rgba(0.6,0.9,0.7,1)
-        polygonCenter: Qt.point(0.0,0.0)
+        polygonCenter: Qt.point(0.2,0.2)
 
         Timer{
             interval: 500;
@@ -72,6 +73,43 @@ ApplicationWindow {
         }
 
     }
+
+    /*begin:debug*/
+    Rectangle{
+
+        width: 32
+        height: 32
+        x : 200+16*0.2
+        y : 200-16*0.2
+        border.width: 3
+        border.color: "black"
+        color: Qt.rgba(0,0,0,0)
+
+        Rectangle{
+            anchors.centerIn: parent
+            width: parent.width * 0.5
+            height: parent.height *0.5
+            border.width: 1
+            border.color: "black"
+            color: Qt.rgba(0,0,0,0)
+        }
+
+    }
+
+     PolygonPoint{
+
+        width : 8
+        height : 8
+
+        x : 200+16+16*0.2
+        y : 200+16-16*0.2
+
+        polygonSize: Static.roundPointPolygonSize()
+        polygonColor: "black"
+        polygonCenter: Qt.point(-1,1)
+
+    }
+    /*end:debug*/
 
 }
 /*endl_input_of_latex_for_clanguage_lick*/

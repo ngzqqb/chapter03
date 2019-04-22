@@ -31,6 +31,13 @@ namespace sstd {
         }
     }
 
+    void PolygonPoint::setPolygonRadius(const double & arg){
+        if(thisData->setLogicalRadius(arg)){
+            polygonRadiusChanged();
+            this->update();
+        }
+    }
+
     void PolygonPoint::setPolygonSize(const int & arg) {
         if (thisData->setPolygonSize(arg)) {
             polygonSizeChanged();

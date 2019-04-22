@@ -16,6 +16,8 @@ namespace sstd {
     public:
         Q_PROPERTY(int polygonSize READ getPolygonSize WRITE setPolygonSize NOTIFY polygonSizeChanged)
     public:
+        Q_PROPERTY(double polygonRadius READ getPolygonRadius WRITE setPolygonRadius NOTIFY polygonRadiusChanged)
+    public:
         PolygonPoint(QQuickItem *p = nullptr);
     public:
         inline int getPolygonSize() const;
@@ -27,9 +29,13 @@ namespace sstd {
         inline QColor getPolygonColor() const;
         void setPolygonColor(const QColor &);
     public:
+        inline double getPolygonRadius() const;
+        void setPolygonRadius(const double &);
+    public:
         Q_SIGNAL void polygonSizeChanged();
         Q_SIGNAL void polygonCenterChanged();
         Q_SIGNAL void polygonColorChanged();
+        Q_SIGNAL void polygonRadiusChanged();
     protected:
         virtual QSGNode * updatePaintNode(QSGNode *, QQuickItem::UpdatePaintNodeData *) override;
     private:
@@ -38,7 +44,7 @@ namespace sstd {
         sstd_class(PolygonPoint);
     };
 
-    inline int PolygonPoint::getPolygonSize() const{
+    inline int PolygonPoint::getPolygonSize() const {
         return thisData->getPolygonSize();
     }
 
@@ -49,6 +55,11 @@ namespace sstd {
     inline QColor PolygonPoint::getPolygonColor() const {
         return thisData->getColor();
     }
+
+    inline double PolygonPoint::getPolygonRadius() const{
+        return thisData->getLogicalRadius();
+    }
+
 
 }/*namespace sstd*/
 
