@@ -1,11 +1,12 @@
 ﻿/* appqml/polygon_point/main.qml */
 import QtQuick 2.9
 import QtQuick.Controls 2.5
+import sstd.register.type 2.0
 
 ApplicationWindow {
 
     width: 360 ;
-    height: 64 ;
+    height: 84 ;
     visible: true ;
 
    Revision0{
@@ -24,6 +25,20 @@ ApplicationWindow {
        id : id3
    }
 
+   RegisterObject{
+       id : id4
+
+       function getString(){
+           return "2.0 : " +
+                   id4.test +
+                   " " +
+                   id4.test1 +
+                   " " +
+                   id4.test2;
+       }
+
+   }
+
    TextArea{
    anchors.fill: parent
    Component.onCompleted: {
@@ -32,6 +47,7 @@ ApplicationWindow {
        append(id1.getString())
        append(id2.getString())
        append(id3.getString())
+       append(id4.getString())
 
    }
    }
