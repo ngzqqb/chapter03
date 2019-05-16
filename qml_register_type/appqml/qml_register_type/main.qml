@@ -30,11 +30,11 @@ ApplicationWindow {
 
        function getString(){
            return "2.0 : " +
-                   id4.test +
+                   id4.test() +
                    " " +
-                   id4.test1 +
+                   id4.test1() +
                    " " +
-                   id4.test2;
+                   id4.test2();
        }
 
    }

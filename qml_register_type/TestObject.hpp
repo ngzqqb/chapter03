@@ -61,6 +61,23 @@ namespace sstd {
         return thisTest2;
     }
 
+    class NewTest : public QObject {
+        Q_OBJECT
+    public:
+        Q_INVOKABLE inline int test1() const {
+            return 1;
+        }
+        Q_INVOKABLE inline int test2() const{
+            return 1;
+        }
+        Q_INVOKABLE inline int test() const{
+            return 1;
+        }
+    private:
+        sstd_class(NewTest);
+    };
+
+
 }/*namespace sstd*/
 
 
