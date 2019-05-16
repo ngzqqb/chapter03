@@ -5,7 +5,7 @@ RegisterObject{
     id : id2
 
     function getString(){
-        return "1.0 : " +
+        return "1.2 : " +
                 id2.test +
                 " " +
                 id2.test1 +

@@ -20,6 +20,10 @@ ApplicationWindow {
        id : id2
    }
 
+   Revision3{
+       id : id3
+   }
+
    TextArea{
    anchors.fill: parent
    Component.onCompleted: {
@@ -27,6 +31,7 @@ ApplicationWindow {
        append(id0.getString())
        append(id1.getString())
        append(id2.getString())
+       append(id3.getString())
 
    }
    }
