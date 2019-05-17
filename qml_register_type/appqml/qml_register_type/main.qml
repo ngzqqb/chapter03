@@ -29,7 +29,7 @@ RegisterObject{
     property var hasBasicV1: try{ return basicV1 ; } catch( varError ){ return "u" }
 
     function getString(){
-        return "1.2 : " +
+        return "' + arg + ' : " +
                 String(idThe.test)[0] +
                 " " +
                 String(idThe.test1)[0] +
