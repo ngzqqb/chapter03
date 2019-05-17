@@ -8,13 +8,26 @@ namespace sstd {
         Q_OBJECT
     private:
         Q_PROPERTY(int test READ test WRITE setTest NOTIFY testChanged)
+        Q_PROPERTY(int rxx READ rxx WRITE setRxx NOTIFY rxxChanged    REVISION 1)
     signals:
         void testChanged();
+        Q_REVISION(1) void rxxChanged();
     public:
         inline int test() const;
         void setTest(int);
+        inline int rxx() const {
+            return thisRxx;
+        }
+        void setRxx( int arg ){
+            if(thisRxx == arg){
+                return;
+            }
+            thisRxx = arg;
+            rxxChanged();
+        }
     private:
         int thisTest{ 1 };
+        int thisRxx{ 1 };
     private:
         sstd_class(TestObject);
     };
