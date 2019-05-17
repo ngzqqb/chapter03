@@ -41,7 +41,7 @@ RegisterObject{
                 String(idThe.basicV0)[0] +
                 " " +
                 String(idThe.basicV1)[0] +
-                " ? " +
+                " | " +
                 String(hasTest)[0] +
                 " " +
                 String(hasTest1)[0] +
