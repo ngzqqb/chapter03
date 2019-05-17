@@ -2,55 +2,59 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.5
 import sstd.register.type 2.0
+import sstd.styled.app 1.0
 
-ApplicationWindow {
+StyledApplicationWindow {
 
     width: 360 ;
-    height: 84 ;
-    visible: true ;
+    height: 94 ;
 
-   Revision0{
-       id : id0
-   }
+    Component.onCompleted: {
+        GlobalAppData.isDark = false;
+    }
 
-   Revision1{
-       id : id1
-   }
+    Revision0{
+        id : id0
+    }
 
-   Revision2{
-       id : id2
-   }
+    Revision1{
+        id : id1
+    }
 
-   Revision3{
-       id : id3
-   }
+    Revision2{
+        id : id2
+    }
 
-   RegisterObject{
-       id : id4
+    Revision3{
+        id : id3
+    }
 
-       function getString(){
-           return "2.0 : " +
-                   id4.test() +
-                   " " +
-                   id4.test1() +
-                   " " +
-                   id4.test2();
-       }
+    RegisterObject{
+        id : id4
 
-   }
+        function getString(){
+            return "2.0 : " +
+                    id4.test() +
+                    " " +
+                    id4.test1() +
+                    " " +
+                    id4.test2();
+        }
 
-   TextArea{
-   anchors.fill: parent
-   Component.onCompleted: {
+    }
 
-       append(id0.getString())
-       append(id1.getString())
-       append(id2.getString())
-       append(id3.getString())
-       append(id4.getString())
+    TextArea{
+        anchors.fill: parent
+        Component.onCompleted: {
 
-   }
-   }
+            append(id0.getString())
+            append(id1.getString())
+            append(id2.getString())
+            append(id3.getString())
+            append(id4.getString())
+
+        }
+    }
 
 
 }

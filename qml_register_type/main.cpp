@@ -4,7 +4,7 @@
 
 int main(int argc, char ** argv) {
 
-    sstd::QtApplication varApplication{ argc,argv };
+    sstd::QtStyledApplication varApplication{ argc,argv };
 
     QQmlApplicationEngine varEngine;
     {
