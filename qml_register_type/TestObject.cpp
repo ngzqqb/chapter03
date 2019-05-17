@@ -57,8 +57,8 @@ inline static void registerThis() {
     /*1.0*/
     qmlRegisterType<sstd::TestObject >("sstd.register.type",1,0,"RegisterObject");
     /*1.1*/
-    qmlRegisterRevision<sstd::TestBasic,1>("sstd.register.type",1,1);
     qmlRegisterType<sstd::TestObject1 , 1>("sstd.register.type",1,1,"RegisterObject");
+    qmlRegisterRevision<sstd::TestBasic,1>("sstd.register.type",1,1);
     /*1.2*/
     qmlRegisterType<sstd::TestObject2 , 2>("sstd.register.type",1,2,"RegisterObject");
     /*1.3*/
