@@ -7,7 +7,7 @@ import sstd.styled.app 1.0
 StyledApplicationWindow {
 
     width: 360 ;
-    height: 94 ;
+    height: 128 ;
 
     Component.onCompleted: {
         GlobalAppData.isDark = false;
@@ -29,18 +29,8 @@ StyledApplicationWindow {
         id : id3
     }
 
-    RegisterObject{
-        id : id4
-
-        function getString(){
-            return "2.0 : " +
-                    id4.test() +
-                    " " +
-                    id4.test1() +
-                    " " +
-                    id4.test2();
-        }
-
+    Revision2_0{
+        id : id2_0
     }
 
     TextArea{
@@ -51,7 +41,7 @@ StyledApplicationWindow {
             append(id1.getString())
             append(id2.getString())
             append(id3.getString())
-            append(id4.getString())
+            append(id2_0.getString())
 
         }
     }

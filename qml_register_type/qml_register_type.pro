@@ -35,6 +35,7 @@ QMLSOURCES += $$PWD/appqml/qml_register_type/Revision0.qml
 QMLSOURCES += $$PWD/appqml/qml_register_type/Revision1.qml
 QMLSOURCES += $$PWD/appqml/qml_register_type/Revision2.qml
 QMLSOURCES += $$PWD/appqml/qml_register_type/Revision3.qml
+QMLSOURCES += $$PWD/appqml/qml_register_type/Revision2_0.qml
 
 lupdate_only{
     SOURCES += $$QMLSOURCES

@@ -1,4 +1,4 @@
-﻿import sstd.register.type 1.1
+﻿import sstd.register.type 2.0
 
 RegisterObject{
 
@@ -12,7 +12,7 @@ RegisterObject{
     property var hasBasicV1: try{ return basicV1 ; } catch( varError ){ return 'u' }
 
     function getString(){
-        return "1.1 : " +
+        return "2.0 : " +
                 String(idThe.test)[0] +
                 " " +
                 String(idThe.test1)[0] +

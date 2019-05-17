@@ -4,30 +4,54 @@
 
 namespace sstd {
 
-    class TestObject : public QObject {
+    class TestBasic : public QObject {
+        Q_OBJECT
+    private:
+        Q_PROPERTY(int basicV0 READ getBasicV0 WRITE setBasicV0 NOTIFY basicV0Changed)
+    private:
+        Q_PROPERTY(int basicV1 READ getBasicV1 WRITE setBasicV1 NOTIFY basicV1Changed REVISION 1)
+    public:
+        inline int getBasicV0() const;
+        inline int getBasicV1() const;
+    public:
+        void setBasicV0(int);
+        void setBasicV1(int);
+    private:
+        int thisBasicV0{ 1 };
+        int thisBasicV1{ 1 };
+    signals:
+        void basicV0Changed();
+        Q_REVISION(1) void basicV1Changed();
+    private:
+        sstd_class(TestBasic);
+    };
+
+    inline int TestBasic::getBasicV0() const{
+        return thisBasicV0;
+    }
+
+    inline int TestBasic::getBasicV1() const{
+        return thisBasicV1;
+    }
+
+    class TestObject : public TestBasic {
         Q_OBJECT
     private:
         Q_PROPERTY(int test READ test WRITE setTest NOTIFY testChanged)
-        Q_PROPERTY(int rxx READ rxx WRITE setRxx NOTIFY rxxChanged    REVISION 1)
+    private:
+        Q_PROPERTY(int test3 READ test3 WRITE setTest3 NOTIFY test3Changed REVISION 3)
     signals:
         void testChanged();
-        Q_REVISION(1) void rxxChanged();
+        Q_REVISION(3) void test3Changed();
     public:
         inline int test() const;
         void setTest(int);
-        inline int rxx() const {
-            return thisRxx;
-        }
-        void setRxx( int arg ){
-            if(thisRxx == arg){
-                return;
-            }
-            thisRxx = arg;
-            rxxChanged();
-        }
+    public:
+        inline int test3() const;
+        void setTest3(int);
     private:
         int thisTest{ 1 };
-        int thisRxx{ 1 };
+        int thisTest3{ 1 };
     private:
         sstd_class(TestObject);
     };
@@ -72,6 +96,10 @@ namespace sstd {
 
     inline int TestObject2::test2() const {
         return thisTest2;
+    }
+
+    inline int TestObject::test3() const{
+        return thisTest3;
     }
 
     class NewTest : public QObject {
