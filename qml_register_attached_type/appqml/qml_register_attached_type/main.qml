@@ -21,7 +21,7 @@ StyledApplicationWindow {
         color: idRoot.TestAttached.valueAttached
         Text {
             id: idTestText
-            text: String(parent.color)
+            text: String(Qt.rgba(0.5,0.5,0.5,1))
             anchors.centerIn: parent
         }
     }
