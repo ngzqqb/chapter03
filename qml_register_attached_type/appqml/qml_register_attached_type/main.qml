@@ -12,6 +12,7 @@ StyledApplicationWindow {
 
     Component.onCompleted: {
         GlobalAppData.isDark = false;
+        idRoot.visible = true
     }
 
     Rectangle{
@@ -23,6 +24,7 @@ StyledApplicationWindow {
             id: idTestText
             text: String(Qt.rgba(0.5,0.5,0.5,1))
             anchors.centerIn: parent
+            color: GlobalAppData.foreground
         }
     }
 
@@ -33,8 +35,8 @@ StyledApplicationWindow {
         running: true;
         repeat: true
         onTriggered: {
-            idRoot.TestAttached.valueAttached = Qt.rgba(Math.random()*0.7+0.3,
-                                                        Math.random()*0.8+0.2,
+            idRoot.TestAttached.valueAttached = Qt.rgba(Math.random()*0.7+0.2,
+                                                        Math.random()*0.8+0.1,
                                                         Math.random(),1);
         }
     }
