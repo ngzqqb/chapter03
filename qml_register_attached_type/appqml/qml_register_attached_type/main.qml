@@ -7,7 +7,7 @@ import sstd.attached.test 1.0
 StyledApplicationWindow {
 
     id : idRoot
-    width: 360 ;
+    width: 128 ;
     height: 128 ;
 
     Component.onCompleted: {
@@ -15,8 +15,32 @@ StyledApplicationWindow {
     }
 
     Rectangle{
-        anchors.fill: parent
+        anchors.centerIn: parent
+        width: parent.width * 0.8
+        height: parent.height * 0.8
         color: idRoot.TestAttached.valueAttached
+        Text {
+            id: idTestText
+            text: String(parent.color)
+            anchors.centerIn: parent
+        }
+    }
+
+    property alias testText : idTestText.text
+
+    Timer{
+        interval: 500;
+        running: true;
+        repeat: true
+        onTriggered: {
+            idRoot.TestAttached.valueAttached = Qt.rgba(Math.random(),
+                                                        Math.random(),
+                                                        Math.random(),1);
+        }
+    }
+
+    TestAttached.onValueAttachedChanged: {
+        testText = String( TestAttached.valueAttached )
     }
 
 }
