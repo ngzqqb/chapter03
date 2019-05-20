@@ -10,7 +10,7 @@ int main(int argc, char ** argv) {
     {
         /*获得Qml文件绝对路径*/
         auto varFullFileName = sstd::autoLocalPath<QUrl>(
-            QStringLiteral("appqml/qml_register_type/main.qml"));
+            QStringLiteral("appqml/qml_register_attached_type/main.qml"));
         /*加载Qml文件*/
         sstd::checkedLoadQmlFile(&varEngine, &varApplication, varFullFileName);
     }
