@@ -29,6 +29,9 @@ namespace sstd {
         Q_INVOKABLE int getX() const {
             return thisX;
         }
+        Q_INVOKABLE void setX(int arg) {
+            thisX = arg;
+        }
     private:
         int thisX{ 0 };
     private:

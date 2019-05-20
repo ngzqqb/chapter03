@@ -24,7 +24,7 @@ StyledApplicationWindow {
         text: String( "Key2 : " + MyNamespace.Key2 ) + "\n" +
               String( "Key3 : " + MyGadgetNamespace.Key3 ) + "\n" +
               String( "Key4 : " + TestObject.Key4 ) + "\n" +
-              String( "gadgetValue : " + idTestObject.gadgetValue.getX()  )
+              String( "gadgetValue : " + idTestObject.gadgetValue.getX() )
         color: GlobalAppData.foreground
     }
 
