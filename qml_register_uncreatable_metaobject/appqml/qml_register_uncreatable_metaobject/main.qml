@@ -15,9 +15,16 @@ StyledApplicationWindow {
         idRoot.visible = true
     }
 
+    TestObject{
+        id : idTestObject
+    }
+
     Text {
         anchors.centerIn: parent
-        text: String( "Key2 : " + MyNamespace.Key2 )
+        text: String( "Key2 : " + MyNamespace.Key2 ) + "\n" +
+              String( "Key3 : " + MyGadgetNamespace.Key3 ) + "\n" +
+              String( "Key4 : " + TestObject.Key4 ) + "\n" +
+              String( "gadgetValue : " + idTestObject.gadgetValue.getX()  )
         color: GlobalAppData.foreground
     }
 
