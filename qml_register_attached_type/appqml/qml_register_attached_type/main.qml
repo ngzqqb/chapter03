@@ -29,12 +29,12 @@ StyledApplicationWindow {
     property alias testText : idTestText.text
 
     Timer{
-        interval: 500;
+        interval: 998;
         running: true;
         repeat: true
         onTriggered: {
-            idRoot.TestAttached.valueAttached = Qt.rgba(Math.random(),
-                                                        Math.random(),
+            idRoot.TestAttached.valueAttached = Qt.rgba(Math.random()*0.5+0.5,
+                                                        Math.random()*0.4+0.6,
                                                         Math.random(),1);
         }
     }
