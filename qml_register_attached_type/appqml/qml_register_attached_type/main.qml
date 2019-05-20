@@ -33,8 +33,8 @@ StyledApplicationWindow {
         running: true;
         repeat: true
         onTriggered: {
-            idRoot.TestAttached.valueAttached = Qt.rgba(Math.random()*0.5+0.5,
-                                                        Math.random()*0.4+0.6,
+            idRoot.TestAttached.valueAttached = Qt.rgba(Math.random()*0.7+0.3,
+                                                        Math.random()*0.8+0.2,
                                                         Math.random(),1);
         }
     }
