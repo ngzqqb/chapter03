@@ -1,4 +1,4 @@
-﻿/* appqml/qml_register_type/main.qml */
+﻿/* appqml/qml_register_attached_type/main.qml */
 import QtQuick 2.9
 import QtQuick.Controls 2.5
 import sstd.register.type 2.0

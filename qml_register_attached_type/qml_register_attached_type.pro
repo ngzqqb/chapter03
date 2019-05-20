@@ -1,11 +1,11 @@
-# qml_register_type/qml_register_type.pro
+# qml_register_attached_type/qml_register_attached_type.pro
 
 TEMPLATE = app
 
 CONFIG(debug,debug|release){
-    TARGET = qml_register_type_debug
+    TARGET = qml_register_attached_type_debug
 }else{
-    TARGET = qml_register_type
+    TARGET = qml_register_attached_type
 }
 
 SOURCES += $$PWD/main.cpp \
@@ -33,7 +33,7 @@ CONFIG(debug,debug|release){
     export(QMAKE_POST_LINK)
 }
 
-QMLSOURCES += $$PWD/appqml/qml_register_type/main.qml
+QMLSOURCES += $$PWD/appqml/qml_register_attached_type/main.qml
 
 lupdate_only{
     SOURCES += $$QMLSOURCES
