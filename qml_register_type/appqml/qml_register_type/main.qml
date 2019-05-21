@@ -12,6 +12,7 @@ StyledApplicationWindow {
 
     Component.onCompleted: {
         GlobalAppData.isDark = false;
+        visible = true
     }
 
     function getTestString(arg){
