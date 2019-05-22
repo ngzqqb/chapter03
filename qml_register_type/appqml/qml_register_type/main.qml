@@ -11,7 +11,7 @@ StyledApplicationWindow {
     height: 128 ;
 
     Component.onCompleted: {
-        GlobalAppData.isDark = defaultIsDark;
+        reloadDefaultStyle();
         visible = true
     }
 
