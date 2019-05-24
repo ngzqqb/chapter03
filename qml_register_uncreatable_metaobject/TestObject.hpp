@@ -10,7 +10,7 @@ namespace sstd {
             Key1,
             Key2,
         };
-        Q_ENUMS(MyEnum)
+        Q_ENUM_NS(MyEnum)
     }
 
     class TestGadget{
@@ -21,7 +21,7 @@ namespace sstd {
             Key2,
             Key3,
         };
-        Q_ENUMS(MyEnum)
+        Q_ENUM(MyEnum)
     public:
         friend inline bool operator==(const TestGadget & l,const TestGadget & r){
             return l.thisX == r.thisX;
