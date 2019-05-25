@@ -10,10 +10,6 @@ StyledApplicationWindow {
     width: 128 ;
     height: 128 ;
 
-    Component.onCompleted: {
-        Qt.callLater(runOnceOnStart)
-    }
-
     Rectangle{
         anchors.centerIn: parent
         width: parent.width * 0.8

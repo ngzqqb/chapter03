@@ -10,10 +10,6 @@ StyledApplicationWindow {
     width: 360 ;
     height: 128 ;
 
-    Component.onCompleted: {
-        Qt.callLater(runOnceOnStart)
-    }
-
     function getTestString(arg){
     return  "import sstd.register.type " + arg +
     "\n"+ '
