@@ -11,7 +11,6 @@ StyledApplicationWindow {
     height: 128 ;
 
     Component.onCompleted: {
-        reloadDefaultStyle();
         idRoot.visible = true
     }
 
