@@ -11,7 +11,7 @@ StyledApplicationWindow {
     height: 128 ;
 
     Component.onCompleted: {
-        idRoot.visible = true
+        Qt.callLater(runOnceOnStart)
     }
 
     Rectangle{

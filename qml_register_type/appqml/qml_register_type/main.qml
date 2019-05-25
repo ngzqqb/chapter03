@@ -11,7 +11,7 @@ StyledApplicationWindow {
     height: 128 ;
 
     Component.onCompleted: {
-        visible = true
+        Qt.callLater(runOnceOnStart)
     }
 
     function getTestString(arg){
