@@ -2,7 +2,10 @@
 import QtQuick 2.9
 import QtQuick.Controls 2.5
 import sstd.register.type 2.0
-import sstd.styled.app 1.0
+
+/*begin:import*/
+import theqml_the_debug.sstd.styled.app 1.0
+/*end:import*/
 
 StyledApplicationWindow {
 
