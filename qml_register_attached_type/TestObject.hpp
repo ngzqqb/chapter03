@@ -28,14 +28,3 @@ namespace sstd {
 }/*namespace sstd*/
 
 QML_DECLARE_TYPEINFO(sstd::TestAttachedType, QML_HAS_ATTACHED_PROPERTIES)
-
-
-
-
-
-
-
-
-
-
-

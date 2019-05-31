@@ -42,5 +42,3 @@ lupdate_only{
 DISTFILES += $$QMLSOURCES
 QML_IMPORT_PATH += $${SSTD_LIBRARY_OUTPUT_PATH}
 #/*endl_input_of_latex_for_clanguage_lick*/"
-
-
