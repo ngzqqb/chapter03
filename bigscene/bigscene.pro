@@ -33,6 +33,8 @@ CONFIG(debug,debug|release){
 }
 
 QMLSOURCES += $$PWD/appqml/bigscene/main.qml
+QMLSOURCES += $$PWD/appqml/bigscene/Files/Rectangles.qml
+QMLSOURCES += $$PWD/appqml/bigscene/Files/PrivateBasic.qml
 
 lupdate_only{
     SOURCES += $$QMLSOURCES

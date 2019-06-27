@@ -2,9 +2,18 @@
 
 namespace sstd{
 
+    inline static void updateTestScene(QGraphicsScene * argScene){
+        for( int i = 0;i<12 ;++i ){
+            for( int j =0;j<12 ;++j ) {
+                auto varRect = argScene->addRect ( i*32,j*32,32,32 );
+                varRect->setBrush ( QColor(std::rand()&255,128,255) );
+            }
+        }
+    }
+
     SimpleRectanglesWorld::SimpleRectanglesWorld(){
-        connect ( &thisScene,&QGraphicsScene::changed,
-                  this,&SimpleRectanglesWorld::changed );
+        connect ( &thisScene,&QGraphicsScene::changed, this,&SimpleRectanglesWorld::changed );
+        updateTestScene(&thisScene);
     }
 
     void SimpleRectanglesWorld::updateViewWidth(int arg){
@@ -119,20 +128,12 @@ namespace sstd{
         this->update (  );
     }
 
-
 }/*namespace sstd*/
 
 inline static void registerThis(){
-
+    qmlRegisterType<sstd::SimpleRectanglesWorld> ("sstd.simple.scene",1,0,"SimpleRectanglesWorld");
+    qmlProtectModule("sstd.simple.scene",1);
 }
 Q_COREAPP_STARTUP_FUNCTION(registerThis)
-
-
-
-
-
-
-
-
 
 
