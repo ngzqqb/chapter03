@@ -63,28 +63,8 @@ namespace sstd {
         int argY,
         int argWidth,
         int argHeight) {
-
         QRect varTargetRect{ argX,argY,argWidth,argHeight };
-
-        {
-            auto varRectNotUpdate = varTargetRect.intersected(thisCurrentViewPort);
-            if (varRectNotUpdate.isEmpty()) {/*全部改变*/
-                thisCurrentViewPort = varTargetRect;
-                thisRegionNotReDraw = sstd_make_shared<QRegion>(varTargetRect) ;
-                thisScene.invalidate(thisCurrentViewPort);
-                return;
-            }
-        }
-
-        {/*部分改变*/
-            QRegion varRegin{ varTargetRect };
-            varRegin -= thisCurrentViewPort;
-            thisRegionNotReDraw = sstd_make_shared<QRegion>(varRegin);
-            for (const auto & varI : varRegin) {
-                thisScene.invalidate(varI);
-            }
-        }
-
+        thisRegionNotReDraw = sstd_make_shared<QRegion>(varTargetRect);
         thisCurrentViewPort = varTargetRect;
     }
 
