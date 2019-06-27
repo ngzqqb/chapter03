@@ -2,15 +2,6 @@
 
 namespace sstd{
 
-    class SimpleRectanglesWorld::SimpleRectanglesWorldData{
-    public:
-        private:
-        int width ;
-        int height ;
-    private:
-        sstd_class (SimpleRectanglesWorldData);
-    };
-
     SimpleRectanglesWorld::SimpleRectanglesWorld(){
 
     }
