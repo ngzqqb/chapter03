@@ -79,7 +79,7 @@ namespace sstd {
                     thisCurrentViewPort.width(),
                     thisCurrentViewPort.height())/*target*/,
                 thisCurrentViewPort/*source*/);
-            painter->drawImage(0, 0, thisLastDraw);
+            painter->drawImage(-thisCurrentViewPort.x(), -thisCurrentViewPort.y(), thisLastDraw);
             return;
         }
 
@@ -95,10 +95,10 @@ namespace sstd {
                         varTarget/*target*/,
                         varI/*source*/);
                 }
-                painter->drawImage(0, 0, thisLastDraw);
+                painter->drawImage(thisCurrentViewPort.x(), thisCurrentViewPort.y(), thisLastDraw);
             } else {
 
-                painter->drawImage(0, 0, thisLastDraw);
+                painter->drawImage(thisCurrentViewPort.x(), thisCurrentViewPort.y(), thisLastDraw);
             }
         }
 
