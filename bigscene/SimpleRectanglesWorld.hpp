@@ -1,10 +1,10 @@
 ﻿#pragma once
 
-#include "SimpleRectanglesWorldData.hpp"
+#include <sstd_qt_qml_quick_library.hpp>
 
 namespace sstd {
 
-    class SimpleRectanglesWorld : public QQuickItem {
+    class SimpleRectanglesWorld : public QQuickPaintedItem {
         Q_OBJECT
     public:
         SimpleRectanglesWorld();
@@ -12,8 +12,12 @@ namespace sstd {
         void updateViewHeight(int);
         void updateViewX(int);
         void updateViewY(int);
+    protected:
+        void  paint(QPainter *painter) override ;
     private:
-        std::shared_ptr<SimpleRectanglesWorldData> thisRectanglesData;
+        void updateViewPort(int,int,int,int);
+        QRect thisCurrentViewPort ;
+        QGraphicsScene thisScene;
     private:
         sstd_class (SimpleRectanglesWorld);
     };
