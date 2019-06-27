@@ -8,10 +8,10 @@ namespace sstd {
         Q_OBJECT
     public:
         SimpleRectanglesWorld();
-        void updateViewWidth(int);
-        void updateViewHeight(int);
-        void updateViewX(int);
-        void updateViewY(int);
+        Q_INVOKABLE void updateViewWidth(int);
+        Q_INVOKABLE void updateViewHeight(int);
+        Q_INVOKABLE void updateViewX(int);
+        Q_INVOKABLE void updateViewY(int);
     protected:
         void  paint(QPainter *painter) override;
     private:

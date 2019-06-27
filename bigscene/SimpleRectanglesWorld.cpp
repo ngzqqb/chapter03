@@ -13,9 +13,10 @@ namespace sstd {
 
     SimpleRectanglesWorld::SimpleRectanglesWorld() {
         connect(&thisScene, &QGraphicsScene::changed, this, &SimpleRectanglesWorld::changed);
-        updateTestScene(&thisScene);
         this->updateViewHeight(1024);
         this->updateViewWidth(1024);
+        /*this is only for test ... */
+        updateTestScene(&thisScene);
     }
 
     void SimpleRectanglesWorld::updateViewWidth(int arg) {
@@ -69,7 +70,7 @@ namespace sstd {
             auto varRectNotUpdate = varTargetRect.intersected(thisCurrentViewPort);
             if (varRectNotUpdate.isEmpty()) {/*全部改变*/
                 thisCurrentViewPort = varTargetRect;
-                thisRegionNotReDraw.reset();
+                thisRegionNotReDraw = sstd_make_shared<QRegion>(varTargetRect) ;
                 thisScene.invalidate(thisCurrentViewPort);
                 return;
             }
@@ -78,9 +79,7 @@ namespace sstd {
         {/*部分改变*/
             QRegion varRegin{ varTargetRect };
             varRegin -= thisCurrentViewPort;
-            if (thisRegionNotReDraw) {
-                (*thisRegionNotReDraw) &= varTargetRect;
-            }
+            thisRegionNotReDraw = sstd_make_shared<QRegion>(varRegin);
             for (const auto & varI : varRegin) {
                 thisScene.invalidate(varI);
             }
@@ -91,6 +90,7 @@ namespace sstd {
 
     void SimpleRectanglesWorld::paint(QPainter *painter) {
         auto varAboutToDraw = std::move(thisRegionNotReDraw);
+
         if (thisLastDraw.size() != thisCurrentViewPort.size()) {
             thisLastDraw = QImage(thisCurrentViewPort.size(), QImage::Format_RGBA8888_Premultiplied);
             QPainter varPainter{ &thisLastDraw };
@@ -103,19 +103,23 @@ namespace sstd {
             return;
         }
 
-        QPainter varPainter{ &thisLastDraw };
-        if (varAboutToDraw) {
-            for (const auto & varI : std::as_const(*varAboutToDraw)) {
-                thisScene.render(&varPainter,
-                    QRectF(varI.x() - thisCurrentViewPort.x(),
+        {
+            QPainter varPainter{ &thisLastDraw };
+            if (varAboutToDraw) {
+                for (const auto & varI : std::as_const(*varAboutToDraw)) {
+                    const auto varTarget = QRectF(varI.x() - thisCurrentViewPort.x(),
                         varI.y() - thisCurrentViewPort.y(),
                         varI.width(),
-                        varI.height())/*target*/,
-                    varI/*source*/);
+                        varI.height());
+                    thisScene.render(&varPainter,
+                        varTarget/*target*/,
+                        varI/*source*/);
+                }
+                painter->drawImage(0, 0, thisLastDraw);
+            } else {
+
+                painter->drawImage(0, 0, thisLastDraw);
             }
-            painter->drawImage(0, 0, thisLastDraw);
-        } else {
-            painter->drawImage(0, 0, thisLastDraw);
         }
 
     }
