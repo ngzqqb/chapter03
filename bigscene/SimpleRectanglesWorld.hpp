@@ -18,6 +18,9 @@ namespace sstd {
         void updateViewPort(int,int,int,int);
         QRect thisCurrentViewPort ;
         QGraphicsScene thisScene;
+        std::shared_ptr< QRegion > thisRegionNotReDraw;
+        QImage thisLastDraw;
+        Q_SLOT void changed(const QList<QRectF> &region);
     private:
         sstd_class (SimpleRectanglesWorld);
     };
