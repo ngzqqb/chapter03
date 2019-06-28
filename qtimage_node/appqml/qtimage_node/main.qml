@@ -9,11 +9,12 @@ import theqml_the_debug.qtimage_node_module 1.0
 
 StyledApplicationWindow {
 
-    width: 360 ;
-    height: 64 ;
+    width: 512 ;
+    height: 360 ;
     id : idRoot ; 
 
     QtImageItem{
+        anchors.fill: parent
     }
 
     Component.onCompleted: {
