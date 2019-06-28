@@ -16,6 +16,9 @@ HEADERS += $$PWD/QtImageNode.hpp
 SOURCES += $$PWD/QtImageItem.cpp
 HEADERS += $$PWD/QtImageItem.hpp
 
+SOURCES += $$PWD/QtLocalImageLoader.cpp
+HEADERS += $$PWD/QtLocalImageLoader.hpp
+
 include($$PWD/../../sstd_library/sstd_library.pri)
 include($$PWD/../../sstd_qt_qml_quick_library/sstd_qt_qml_quick_library.pri)
 

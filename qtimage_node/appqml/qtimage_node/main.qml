@@ -14,7 +14,22 @@ StyledApplicationWindow {
     id : idRoot ; 
 
     QtImageItem{
+        id : idQtImageItem
         anchors.fill: parent
+        Component.onCompleted: {
+            idQtImageItem.setImage(QtLocalImageLoader.loadImage(
+                                                       Qt.resolvedUrl("figure.jpg")));
+        }
+        //Timer{
+        //    interval: 1000 ;
+        //    running: true;
+        //    repeat: false
+        //    triggeredOnStart:true
+        //    onTriggered: {
+        //        idQtImageItem.setImage(QtLocalImageLoader.loadImage(
+        //                                   Qt.resolvedUrl("figure.jpg")));
+        //    }
+        //}
     }
 
     Component.onCompleted: {

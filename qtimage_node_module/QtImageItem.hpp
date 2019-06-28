@@ -10,7 +10,7 @@ namespace sstd {
     public:
         QtImageItem();
     public:
-        void setImage(const QImage &);
+        Q_INVOKABLE void setImage(const QImage &);
     protected:
         QSGNode * updatePaintNode(QSGNode *oldNode, QQuickItem::UpdatePaintNodeData *updatePaintNodeData) override;
     private:

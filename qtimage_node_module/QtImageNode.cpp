@@ -26,7 +26,8 @@ namespace sstd {
             const GLuint * getTextureQImage() const {
                 return &thisQImageTexture;
             }
-            inline void updateToQImage(const QImage & arg) {
+            void updateToQImage(const QImage & arg) {
+                thisMarkImageForceToUpdate = true;
                 thisImage = arg;
             }
             inline ImageMaterial() {
@@ -38,6 +39,7 @@ namespace sstd {
         private:
             GLuint thisQImageTexture{ 0 };
             QImage thisImage;
+            bool thisMarkImageForceToUpdate{ true };
             friend class ImageShader;
         private:
             sstd_class(ImageMaterial);
@@ -114,7 +116,6 @@ void main() {
 
             /* 释放资源 */
             inline void deactivate() override {
-                destoryThisGL();
             }
 
             inline ImageShader(ImageMaterial * arg) :
@@ -122,23 +123,32 @@ void main() {
             }
 
             inline ~ImageShader() {
-                destoryThisGL();
+                this->destoryThisGL();
             }
 
         private:
             inline void constructThisGL() {
+                if ((thisImageMaterial->thisMarkImageForceToUpdate) ||
+                    (thisImageMaterial->thisQImageTexture == 0)) {
 #if defined(THE_DEBUG)
-                qDebug()
-                    << "image update : "
-                    << thisImageMaterial->thisImage.width()
-                    << thisImageMaterial->thisImage.height();
+                    qDebug()
+                        << "image update : "
+                        << thisImageMaterial->thisImage.width()
+                        << thisImageMaterial->thisImage.height();
 #endif
-                sstd::opengl_utility::updateTexture(&(thisImageMaterial->thisQImageTexture),
-                    thisImageMaterial->thisImage);
+                    thisImageMaterial->thisMarkImageForceToUpdate = false;
+                    sstd::opengl_utility::updateTexture(&(thisImageMaterial->thisQImageTexture),
+                        thisImageMaterial->thisImage);
+                }
+
             }
 
             inline void destoryThisGL() {
+#if defined(THE_DEBUG)
+                qDebug() << "destory the texture ... ";
+#endif
                 glDeleteTextures(1, &(thisImageMaterial->thisQImageTexture));
+                thisImageMaterial->thisQImageTexture = 0;
             }
 
         private:
@@ -234,6 +244,7 @@ void main() {
 
     bool QtImageNodeData::setImage(QImage arg) {
         thisImage = std::move(arg);
+        thisImage.convertTo(sstd::opengl_utility::defaultQImageFormat());
         thisFlags.set<ImageNodeDataState::ImageChanged>();
         return true;
     }
