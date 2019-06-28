@@ -5,19 +5,18 @@
 
 namespace sstd {
 
-   class QtImageItem : public QQuickItem {
-       Q_OBJECT
-   public:
-       QtImageItem();
-   public:
-       void setImage( const QImage & );
-   protected:
-       QSGNode * updatePaintNode(QSGNode *oldNode, QQuickItem::UpdatePaintNodeData *updatePaintNodeData) override;
-   private:
-       std::shared_ptr<QtImageNodeData> thisImageData;
-   private:
-       sstd_class(QtImageItem);
-   };
-
+    class QtImageItem : public QQuickItem {
+        Q_OBJECT
+    public:
+        QtImageItem();
+    public:
+        void setImage(const QImage &);
+    protected:
+        QSGNode * updatePaintNode(QSGNode *oldNode, QQuickItem::UpdatePaintNodeData *updatePaintNodeData) override;
+    private:
+        std::shared_ptr<QtImageNodeData> thisImageData;
+    private:
+        sstd_class(QtImageItem);
+    };
 
 }/*namespace sstd*/

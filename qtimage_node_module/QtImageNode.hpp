@@ -4,20 +4,20 @@
 
 namespace sstd {
 
-    enum class ImageNodeDataState{
+    enum class ImageNodeDataState {
         ImageChanged,
         ImageSizeChanged,
         Size
     };
 
-    class QtImageNodeData  {
+    class QtImageNodeData {
     public:
         inline QImage getImage() const;
         inline QSizeF getImageSize() const;
-        bool setImage(QImage );
-        bool setImageSize(const QSizeF & );
+        bool setImage(QImage);
+        bool setImageSize(const QSizeF &);
     private:
-        QImage thisImage ;
+        QImage thisImage;
         QSizeF thisImageSize;
         sstd::QuickFlags< ImageNodeDataState::Size > thisFlags;
     public:
@@ -45,22 +45,22 @@ namespace sstd {
     public:
         void updateTheNode();
     private:
-        QtImageNodeWrap * thisDrawImage{nullptr};
-        std::shared_ptr<QtImageNodeData> thisData ;
+        QtImageNodeWrap * thisDrawImage{ nullptr };
+        std::shared_ptr<QtImageNodeData> thisData;
     private:
         sstd_class(QtImageNode);
     };
 
-    inline QImage QtImageNodeData::getImage() const{
-        return thisImage ;
+    inline QImage QtImageNodeData::getImage() const {
+        return thisImage;
     }
 
-    inline QSizeF QtImageNodeData::getImageSize() const{
+    inline QSizeF QtImageNodeData::getImageSize() const {
         return thisImageSize;
     }
 
     template<ImageNodeDataState I>
-    inline bool QtImageNodeData::testChanged() const{
+    inline bool QtImageNodeData::testChanged() const {
         return thisFlags.test<I>();
     }
 
