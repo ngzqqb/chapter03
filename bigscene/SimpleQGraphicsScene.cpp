@@ -7,16 +7,25 @@ namespace sstd {
 
     SimpleQGraphicsSceneViewPort::SimpleQGraphicsSceneViewPort(SimpleQGraphicsSceneView * arg)
         :thisView{arg}{
+        this->setParent(arg);
+    }
+
+    VisibleSimpleQGraphicsSceneViewPort::VisibleSimpleQGraphicsSceneViewPort(SimpleQGraphicsSceneView * arg) 
+        : thisView{arg} {
+        this->setParent(arg);
+        this->setParentItem(arg);
     }
 
     SimpleQGraphicsSceneView::SimpleQGraphicsSceneView(){
+        thisSceneViewPort = sstd_new<SimpleQGraphicsSceneViewPort>(this);
+        thisVisibleView = sstd_new<VisibleSimpleQGraphicsSceneViewPort>(this);
         this->setWidth (10);
         this->setHeight (10);
         thisScene.setSceneRect (0,0,width(),height());
         connect (this,&QQuickItem::heightChanged ,[this](){thisScene.setSceneRect (0,0,width(),height());});
         connect (this,&QQuickItem::widthChanged ,[this](){thisScene.setSceneRect (0,0,width(),height());});
         connect ( &thisScene,&QGraphicsScene::changed , this,&SimpleQGraphicsSceneView::updateViewPort );
-        thisSceneViewPort = sstd_make_unique<SimpleQGraphicsSceneViewPort>(this);
+        
     }
 
     void SimpleQGraphicsSceneView::updateViewPort(QList<QRectF> arg){
@@ -57,13 +66,13 @@ namespace sstd {
         }
 
         /*显示结果*/
-        this->setImage (thisLastPainted);
+        thisVisibleView->setImage (thisLastPainted);
 
     }
 
     void SimpleQGraphicsSceneView::updateViewPortSize(){
-        this->setOffsetX(thisSceneViewPort->getX());
-        this->setOffsetY(thisSceneViewPort->getY());
+        thisVisibleView->setOffsetX(thisSceneViewPort->getX());
+        thisVisibleView->setOffsetY(thisSceneViewPort->getY());
         updateViewPort( { thisSceneViewPort->getViewPortRect () } );
     }
 

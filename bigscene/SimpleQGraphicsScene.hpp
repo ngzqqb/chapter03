@@ -53,7 +53,18 @@ namespace sstd{
         sstd_class(SimpleQGraphicsSceneViewPort);
     };
 
-    class SimpleQGraphicsSceneView : public QtImageItem {
+    class VisibleSimpleQGraphicsSceneViewPort : public QtImageItem {
+        Q_OBJECT
+    public:
+        VisibleSimpleQGraphicsSceneViewPort(SimpleQGraphicsSceneView *);
+    private:
+        using Super = QtImageItem;
+        SimpleQGraphicsSceneView * const thisView;
+    private:
+        sstd_class(VisibleSimpleQGraphicsSceneViewPort);
+    };
+
+    class SimpleQGraphicsSceneView : public QQuickItem {
         Q_OBJECT
     private:
         Q_PROPERTY(SimpleQGraphicsSceneViewPort * viewport READ getViewport CONSTANT )
@@ -64,7 +75,8 @@ namespace sstd{
     private:
         QImage thisLastPainted;
         SimpleQGraphicsScene thisScene;
-        std::unique_ptr< SimpleQGraphicsSceneViewPort > thisSceneViewPort;
+        SimpleQGraphicsSceneViewPort * thisSceneViewPort{nullptr};
+        VisibleSimpleQGraphicsSceneViewPort * thisVisibleView{nullptr};
         void updateViewPortSize();
         void updateViewPort( QList<QRectF> );
         friend class SimpleQGraphicsSceneViewPort;
@@ -73,7 +85,7 @@ namespace sstd{
     };
 
     inline SimpleQGraphicsSceneViewPort * SimpleQGraphicsSceneView::getViewport() const{
-        return thisSceneViewPort.get();
+        return thisSceneViewPort ;
     }
 
     inline qreal SimpleQGraphicsSceneViewPort::getX() const{
