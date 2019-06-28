@@ -13,6 +13,15 @@ SOURCES += $$PWD/main.cpp
 SOURCES += $$PWD/SimpleRectanglesWorld.cpp
 HEADERS += $$PWD/SimpleRectanglesWorld.hpp
 
+SOURCES += $$PWD/SimpleQGraphicsScene.cpp
+HEADERS += $$PWD/SimpleQGraphicsScene.hpp
+
+SOURCES += $$PWD/../shared/QtImageNode.cpp
+HEADERS += $$PWD/../shared/QtImageNode.hpp
+
+SOURCES += $$PWD/../shared/QtImageItem.cpp
+HEADERS += $$PWD/../shared/QtImageItem.hpp
+
 include($$PWD/../../sstd_library/sstd_library.pri)
 include($$PWD/../../sstd_qt_qml_quick_library/sstd_qt_qml_quick_library.pri)
 include($$PWD/../../sstd_library/add_vc_debug_console.pri)

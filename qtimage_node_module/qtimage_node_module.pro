@@ -10,11 +10,11 @@ HEADERS += $$PWD/the_moudle.hpp
 SOURCES += $$PWD/Empty.cpp
 HEADERS += $$PWD/Empty.hpp
 
-SOURCES += $$PWD/QtImageNode.cpp
-HEADERS += $$PWD/QtImageNode.hpp
+SOURCES += $$PWD/../shared/QtImageNode.cpp
+HEADERS += $$PWD/../shared/QtImageNode.hpp
 
-SOURCES += $$PWD/QtImageItem.cpp
-HEADERS += $$PWD/QtImageItem.hpp
+SOURCES += $$PWD/../shared/QtImageItem.cpp
+HEADERS += $$PWD/../shared/QtImageItem.hpp
 
 SOURCES += $$PWD/QtLocalImageLoader.cpp
 HEADERS += $$PWD/QtLocalImageLoader.hpp
