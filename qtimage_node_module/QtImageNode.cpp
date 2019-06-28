@@ -242,8 +242,8 @@ void main() {
         this->markDirty(DirtyGeometry);
     }
 
-    bool QtImageNodeData::setMatrix(const QMatrix4x4 & arg){
-        if(arg == thisMatrix){
+    bool QtImageNodeData::setMatrix(const QMatrix4x4 & arg) {
+        if (arg == thisMatrix) {
             return false;
         }
         thisMatrix = arg;
@@ -281,9 +281,9 @@ void main() {
             thisDrawImage->updateImageSize(thisData->getImageSize());
         }
 
-        if(thisData->testChanged<ImageNodeDataState::ImageMatrixChanged>()){
-            this->setMatrix(thisData->getImageMatrix ());
-            this->markDirty (DirtyMatrix);
+        if (thisData->testChanged<ImageNodeDataState::ImageMatrixChanged>()) {
+            this->setMatrix(thisData->getImageMatrix());
+            this->markDirty(DirtyMatrix);
         }
 
         thisData->clearAllChange();

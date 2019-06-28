@@ -12,29 +12,29 @@ namespace sstd {
         this->update();
     }
 
-    void QtImageItem::setOffsetX(const qreal & arg){
-        if( std::abs (arg - thisOffestX) < 0.0001){
+    void QtImageItem::setOffsetX(const qreal & arg) {
+        if (std::abs(arg - thisOffestX) < 0.0001) {
             return;
         }
-        thisOffestX=arg;
-        this->updateImageMatrix ();
+        thisOffestX = arg;
+        this->updateImageMatrix();
         offsetXChanged();
     }
 
-    void QtImageItem::setOffsetY(const qreal & arg){
-        if( std::abs (arg - thisOffestY) < 0.0001){
+    void QtImageItem::setOffsetY(const qreal & arg) {
+        if (std::abs(arg - thisOffestY) < 0.0001) {
             return;
         }
-        thisOffestY=arg;
-        this->updateImageMatrix ();
+        thisOffestY = arg;
+        this->updateImageMatrix();
         offsetYChanged();
     }
 
-    void QtImageItem::updateImageMatrix(){
+    void QtImageItem::updateImageMatrix() {
         QMatrix4x4 varMatrix;
-        varMatrix.translate(thisOffestX,thisOffestY );
-        if(thisImageData->setMatrix (varMatrix)){
-            this->update ();
+        varMatrix.translate(thisOffestX, thisOffestY);
+        if (thisImageData->setMatrix(varMatrix)) {
+            this->update();
         }
     }
 
