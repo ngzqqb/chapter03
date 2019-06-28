@@ -123,3 +123,5 @@ inline static void registerThis() {
 Q_COREAPP_STARTUP_FUNCTION(registerThis)
 
 
+//这完全是错误的，准备删除
+
