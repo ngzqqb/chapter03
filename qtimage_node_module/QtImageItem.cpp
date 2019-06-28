@@ -4,6 +4,7 @@ namespace sstd{
 
     QtImageItem::QtImageItem(){
         thisImageData = sstd_make_shared<QtImageNodeData>();
+        this->setFlag(QQuickItem::ItemHasContents, true);
     }
 
     void QtImageItem::setImage( const QImage & arg){
