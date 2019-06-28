@@ -7,6 +7,7 @@ namespace sstd {
     enum class ImageNodeDataState {
         ImageChanged,
         ImageSizeChanged,
+        ImageMatrixChanged,
         Size
     };
 
@@ -14,11 +15,14 @@ namespace sstd {
     public:
         inline QImage getImage() const;
         inline QSizeF getImageSize() const;
+        inline QMatrix4x4 getImageMatrix() const;
         bool setImage(QImage);
         bool setImageSize(const QSizeF &);
+        bool setMatrix(const QMatrix4x4 &);
     private:
         QImage thisImage;
         QSizeF thisImageSize;
+        QMatrix4x4 thisMatrix;
         sstd::QuickFlags< ImageNodeDataState::Size > thisFlags;
     public:
         void clearAllChange();
@@ -62,6 +66,10 @@ namespace sstd {
     template<ImageNodeDataState I>
     inline bool QtImageNodeData::testChanged() const {
         return thisFlags.test<I>();
+    }
+
+    inline QMatrix4x4 QtImageNodeData::getImageMatrix() const{
+        return thisMatrix;
     }
 
 }/*namespace sstd*/

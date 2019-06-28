@@ -242,6 +242,15 @@ void main() {
         this->markDirty(DirtyGeometry);
     }
 
+    bool QtImageNodeData::setMatrix(const QMatrix4x4 & arg){
+        if(arg == thisMatrix){
+            return false;
+        }
+        thisMatrix = arg;
+        thisFlags.set<ImageNodeDataState::ImageMatrixChanged>();
+        return true;
+    }
+
     bool QtImageNodeData::setImage(QImage arg) {
         thisImage = std::move(arg);
         thisImage.convertTo(sstd::opengl_utility::defaultQImageFormat());
@@ -270,6 +279,11 @@ void main() {
 
         if (thisData->testChanged<ImageNodeDataState::ImageSizeChanged>()) {
             thisDrawImage->updateImageSize(thisData->getImageSize());
+        }
+
+        if(thisData->testChanged<ImageNodeDataState::ImageMatrixChanged>()){
+            this->setMatrix(thisData->getImageMatrix ());
+            this->markDirty (DirtyMatrix);
         }
 
         thisData->clearAllChange();

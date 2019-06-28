@@ -28,9 +28,13 @@ StyledApplicationWindow {
                 if(idQtImageItem.drawImageSelect){
                     idQtImageItem.setImage(QtLocalImageLoader.loadImage(
                                                Qt.resolvedUrl("figure1.jpg")));
+                    idQtImageItem.offsetX = 25 ;
+                    idQtImageItem.offsetY = 35 ;
                 }else{
                     idQtImageItem.setImage(QtLocalImageLoader.loadImage(
                                                Qt.resolvedUrl("figure0.jpg")));
+                    idQtImageItem.offsetX = -25 ;
+                    idQtImageItem.offsetY = -35 ;
                 }
             }
         }
