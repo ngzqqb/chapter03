@@ -48,7 +48,7 @@ namespace sstd {
             }
         }
 
-        {
+        {/*删除可见区域以外的更新*/
             std::list< QRectF, sstd::allocator<QRectF> > varTmp;
             auto varPos = arg.cbegin();
             auto varEnd = arg.cend();
