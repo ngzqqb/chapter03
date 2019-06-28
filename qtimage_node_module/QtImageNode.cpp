@@ -46,7 +46,7 @@ return u8R"--------(
 
 in vec2 qt_TexCoord;
 
-uniform sampler2D qt_Texture;
+layout(location = 0) uniform sampler2D qt_Texture;
 out vec4 fragColor          ;
 
 void main() {
@@ -95,6 +95,8 @@ void main() {
                 constructThisGL();
                 /* this->program ()->bind () ; */
                 this->program ()->setUniformValue (1,state.combinedMatrix ());
+                USING_SSTD_GLEW;
+                glActiveTexture(GL_TEXTURE0);
                 glBindTexture ( GL_TEXTURE_2D , thisImageMaterial->thisQImageTexture );
             }
 
