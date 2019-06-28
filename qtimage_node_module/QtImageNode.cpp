@@ -41,7 +41,17 @@ namespace sstd {
             /* 片段着色器 */
             inline const char * fragmentShader() const override{
 return u8R"--------(
+/* Src/qtdeclarative/src/quick/scenegraph/shaders/opaquetexture.frag */
 #version 460
+
+in vec2 qt_TexCoord;
+
+uniform sampler2D qt_Texture;
+out vec4 fragColor          ;
+
+void main() {
+    fragColor = texture2D(qt_Texture, qt_TexCoord);
+}
 
 )---------";
 
@@ -50,7 +60,19 @@ return u8R"--------(
             /* 顶点着色器 */
             inline const char * vertexShader() const override {
                 return  u8R"--------(
+/* Src/qtdeclarative/src/quick/scenegraph/shaders/opaquetexture.vert */
 #version 460
+
+layout(location = 1) uniform mat4 qt_Matrix   ;
+layout(location = 2) in vec4 qt_VertexPosition;
+layout(location = 3) in vec2 qt_VertexTexCoord;
+
+out vec2 qt_TexCoord;
+
+void main() {
+    qt_TexCoord = qt_VertexTexCoord;
+    gl_Position = qt_Matrix * qt_VertexPosition;
+}
 
 )--------";
             }
@@ -58,8 +80,8 @@ return u8R"--------(
             /* 顶点着色器输入 */
             inline char const *const *attributeNames() const override{
                 static const char *const globalAns [] {
-                    "vertexCoord"/*顶点*/,
-                    "vertexColor"/*顶点颜色*/,
+                    "qt_VertexPosition"/*顶点*/,
+                    "qt_VertexTexCoord"/*纹理坐标*/,
                     nullptr
                 };
                 return globalAns;
@@ -71,6 +93,9 @@ return u8R"--------(
                      QSGMaterial * varNew,
                      QSGMaterial * varOld) override {
                 constructThisGL();
+                /* this->program ()->bind () ; */
+                this->program ()->setUniformValue (1,state.combinedMatrix ());
+                glBindTexture ( GL_TEXTURE_2D , thisImageMaterial->thisQImageTexture );
             }
 
            /* 初始化资源 */
@@ -121,12 +146,24 @@ return u8R"--------(
             using Super = QSGGeometry ;
         public:
 
-            inline ImageGeometry():Super{QSGGeometry::defaultAttributes_Point2D() , 4}{
+            inline ImageGeometry():Super{QSGGeometry::defaultAttributes_TexturedPoint2D() , 4}{
                 updateSize(QSizeF{1,1});
+                {/*固定值*/
+                    using Point2D = QSGGeometry::TexturedPoint2D;
+                    auto varData = static_cast<Point2D *>( this->vertexData() );
+                    auto & varData0 = varData[0];
+                    auto & varData1 = varData[1];
+                    auto & varData2 = varData[2];
+                    auto & varData3 = varData[3];
+                    varData0.tx = 0 ; varData0.ty=0;
+                    varData1.tx = 0 ; varData1.ty=1;
+                    varData2.tx = 1 ; varData2.ty=0;
+                    varData2.tx=  1 ; varData2.ty=1;
+                }
             }
 
             inline void updateSize(const QSizeF & arg){
-                using Point2D = QSGGeometry::Point2D;
+                using Point2D = QSGGeometry::TexturedPoint2D;
                 auto varData = static_cast<Point2D *>( this->vertexData() );
                 auto & varData0 = varData[0];
                 auto & varData1 = varData[1];
