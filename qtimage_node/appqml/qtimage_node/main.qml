@@ -16,20 +16,25 @@ StyledApplicationWindow {
     QtImageItem{
         id : idQtImageItem
         anchors.fill: parent
-        Component.onCompleted: {
-            idQtImageItem.setImage(QtLocalImageLoader.loadImage(
-                                                       Qt.resolvedUrl("figure.jpg")));
+        property bool drawImageSelect: false
+
+        Timer{
+            interval: 1000 ;
+            running: true;
+            repeat: true
+            triggeredOnStart:true
+            onTriggered: {
+                idQtImageItem.drawImageSelect = !idQtImageItem.drawImageSelect;
+                if(idQtImageItem.drawImageSelect){
+                    idQtImageItem.setImage(QtLocalImageLoader.loadImage(
+                                               Qt.resolvedUrl("figure1.jpg")));
+                }else{
+                    idQtImageItem.setImage(QtLocalImageLoader.loadImage(
+                                               Qt.resolvedUrl("figure0.jpg")));
+                }
+            }
         }
-        //Timer{
-        //    interval: 1000 ;
-        //    running: true;
-        //    repeat: false
-        //    triggeredOnStart:true
-        //    onTriggered: {
-        //        idQtImageItem.setImage(QtLocalImageLoader.loadImage(
-        //                                   Qt.resolvedUrl("figure.jpg")));
-        //    }
-        //}
+
     }
 
     Component.onCompleted: {
