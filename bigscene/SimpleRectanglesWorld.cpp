@@ -79,7 +79,7 @@ namespace sstd {
                     thisCurrentViewPort.width(),
                     thisCurrentViewPort.height())/*target*/,
                 thisCurrentViewPort/*source*/);
-            painter->drawImage(-thisCurrentViewPort.x(), -thisCurrentViewPort.y(), thisLastDraw);
+            painter->drawImage(thisCurrentViewPort.x(), thisCurrentViewPort.y(), thisLastDraw);
             return;
         }
 
