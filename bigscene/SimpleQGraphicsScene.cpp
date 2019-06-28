@@ -48,15 +48,34 @@ namespace sstd {
             }
         }
 
+        {
+            std::list< QRectF, sstd::allocator<QRectF> > varTmp;
+            auto varPos = arg.cbegin();
+            auto varEnd = arg.cend();
+            for (;varPos!=varEnd;++varPos) {
+                if ( varTargetViewPort.intersected(*varPos).isEmpty() ) {
+                    continue;
+                }
+                varTmp.push_back( *varPos );
+            }
+            if (varTmp.empty()) {
+                return;
+            }
+            arg.clear();
+            for (const auto & varI:varTmp) {
+                arg.push_back(varI);
+            }
+        }
+
         {/*绘制更新区域*/
             QPainter varPainter{ &thisLastPainted };
             for (const auto & varI : std::as_const(arg)) {
                 if (varI.isEmpty()) {
                     continue;
                 }
-                const QSizeF varTargetSize{
-                    varTargetViewPort.width() * varDevicePixelRatio  ,
-                            varTargetViewPort.height() * varDevicePixelRatio
+                const QSizeF varTargetSize{ 
+                    varI.width() * varDevicePixelRatio ,
+                    varI.height() * varDevicePixelRatio
                 };
                 auto varTargetX = (varI.x() - thisSceneViewPort->getX()) * varDevicePixelRatio;
                 auto varTargetY = (varI.y() - thisSceneViewPort->getY()) * varDevicePixelRatio;
