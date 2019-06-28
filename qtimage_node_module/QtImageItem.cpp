@@ -13,7 +13,7 @@ namespace sstd {
     }
 
     void QtImageItem::setOffsetX(const qreal & arg) {
-        if (std::abs(arg - thisOffestX) < 0.0001) {
+        if (std::abs(arg - thisOffestX) < std::numeric_limits<qreal>::epsilon()) {
             return;
         }
         thisOffestX = arg;
@@ -22,7 +22,7 @@ namespace sstd {
     }
 
     void QtImageItem::setOffsetY(const qreal & arg) {
-        if (std::abs(arg - thisOffestY) < 0.0001) {
+        if (std::abs(arg - thisOffestY) < std::numeric_limits<qreal>::epsilon()) {
             return;
         }
         thisOffestY = arg;
