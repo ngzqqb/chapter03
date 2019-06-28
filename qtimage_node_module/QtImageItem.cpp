@@ -15,7 +15,7 @@ namespace sstd{
                                            QQuickItem::UpdatePaintNodeData * ) {
         auto varAns = static_cast< QtImageNode * >(oldNode);
         if( varAns == nullptr ){
-            varAns =  sstd_new<QtImageNode>();
+            varAns =  sstd_new<QtImageNode>(thisImageData);
         }
         thisImageData->setImageSize ( QSizeF{width(),height()} );
         varAns->updateTheNode ();

@@ -90,8 +90,8 @@ void main() {
             /* 每次绘制之前更新状态 */
            inline void updateState(
                      const RenderState &state,
-                     QSGMaterial * varNew,
-                     QSGMaterial * varOld) override {
+                     QSGMaterial * ,
+                     QSGMaterial * ) override {
                 constructThisGL();
                 /* this->program ()->bind () ; */
                 this->program ()->setUniformValue (1,state.combinedMatrix ());
@@ -160,7 +160,7 @@ void main() {
                     varData0.tx = 0 ; varData0.ty=0;
                     varData1.tx = 0 ; varData1.ty=1;
                     varData2.tx = 1 ; varData2.ty=0;
-                    varData2.tx=  1 ; varData2.ty=1;
+                    varData3.tx=  1 ; varData3.ty=1;
                 }
             }
 
@@ -174,7 +174,7 @@ void main() {
                 varData0.x =0 ;varData0.y=0;
                 varData1.x = 0;varData1.y=arg.height ();
                 varData2.x = arg.width ();varData2.y=0;
-                varData2.x=arg.width ();varData2.y=arg.height ();
+                varData3.x=arg.width ();varData3.y=arg.height ();
             }
 
         private:
@@ -183,7 +183,7 @@ void main() {
 
     }/*namespace this_private*/
 
-    QtImageNodeWrap::QtImageNodeWrap(QSGNode * arg) {
+    QtImageNodeWrap::QtImageNodeWrap() {
 
         /* 设置顶点着色器和片段着色器 */
         auto varMaterial = sstd_new<this_private::ImageMaterial>();
@@ -195,13 +195,14 @@ void main() {
         this->setGeometry (varGeometry);
         this->setFlag ( QSGNode::OwnsGeometry );
 
-        /*加入父项*/
-        arg->appendChildNode (this);
-        this->setFlag ( OwnedByParent );
     }
 
     QtImageNode::QtImageNode(std::shared_ptr<QtImageNodeData> arg) :thisData{std::move(arg)} {
-        thisDrawImage = sstd_new<QtImageNodeWrap>(this);
+        thisDrawImage = sstd_new<QtImageNodeWrap>();
+        {
+            this->appendChildNode(thisDrawImage);
+            thisDrawImage->setFlag(OwnedByParent);
+        }
         this->setFlag ( OwnedByParent );
     }
 

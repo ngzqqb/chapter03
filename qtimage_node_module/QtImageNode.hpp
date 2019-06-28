@@ -32,7 +32,7 @@ namespace sstd {
     class QtImageNodeWrap : public QSGGeometryNode {
         using Super = QSGGeometryNode;
     public:
-        QtImageNodeWrap(QSGNode *);
+        QtImageNodeWrap();
         void updateImage(const QImage &);
         void updateImageSize(const QSizeF &);
     private:
