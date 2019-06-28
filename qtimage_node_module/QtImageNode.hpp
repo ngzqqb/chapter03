@@ -6,15 +6,19 @@ namespace sstd {
 
     enum class ImageNodeDataState{
         ImageChanged,
+        ImageSizeChanged,
         Size
     };
 
     class QtImageNodeData  {
     public:
         inline QImage getImage() const;
-        void setImage(QImage );
+        inline QSizeF getImageSize() const;
+        bool setImage(QImage );
+        bool setImageSize(const QSizeF & );
     private:
         QImage thisImage ;
+        QSizeF thisImageSize;
         sstd::QuickFlags< ImageNodeDataState::Size > thisFlags;
     public:
         void clearAllChange();
@@ -26,9 +30,11 @@ namespace sstd {
     };
 
     class QtImageNodeWrap : public QSGGeometryNode {
+        using Super = QSGGeometryNode;
     public:
-    private:
-
+        QtImageNodeWrap(QSGNode *);
+        void updateImage(const QImage &);
+        void updateImageSize(const QSizeF &);
     private:
         sstd_class(QtImageNodeWrap);
     };
@@ -47,6 +53,10 @@ namespace sstd {
 
     inline QImage QtImageNodeData::getImage() const{
         return thisImage ;
+    }
+
+    inline QSizeF QtImageNodeData::getImageSize() const{
+        return thisImageSize;
     }
 
     template<ImageNodeDataState I>

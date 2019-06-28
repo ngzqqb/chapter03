@@ -41,14 +41,18 @@ namespace sstd {
             /* 片段着色器 */
             inline const char * fragmentShader() const override{
 return u8R"--------(
-       )---------";
+#version 460
+
+)---------";
 
             }
 
             /* 顶点着色器 */
             inline const char * vertexShader() const override {
                 return  u8R"--------(
-                        )--------";
+#version 460
+
+)--------";
             }
 
             /* 顶点着色器输入 */
@@ -104,7 +108,7 @@ return u8R"--------(
         };
 
         inline QSGMaterialShader *ImageMaterial::createShader() const  {
-            return sstd_new< ImageShader >( this );
+            return sstd_new< ImageShader >( const_cast<ImageMaterial *>( this ) );
         }
 
         inline int ImageMaterial::compare(const QSGMaterial *other) const {
@@ -113,30 +117,98 @@ return u8R"--------(
                     static_cast<GLint>(varOther->thisQImageTexture);
         }
 
+        class ImageGeometry : public QSGGeometry {
+            using Super = QSGGeometry ;
+        public:
+
+            inline ImageGeometry():Super{QSGGeometry::defaultAttributes_Point2D() , 4}{
+                updateSize(QSizeF{1,1});
+            }
+
+            inline void updateSize(const QSizeF & arg){
+                using Point2D = QSGGeometry::Point2D;
+                auto varData = static_cast<Point2D *>( this->vertexData() );
+                auto & varData0 = varData[0];
+                auto & varData1 = varData[1];
+                auto & varData2 = varData[2];
+                auto & varData3 = varData[3];
+                varData0.x =0 ;varData0.y=0;
+                varData1.x = 0;varData1.y=arg.height ();
+                varData2.x = arg.width ();varData2.y=0;
+                varData2.x=arg.width ();varData2.y=arg.height ();
+            }
+
+        private:
+            sstd_class (ImageGeometry);
+        };
+
     }/*namespace this_private*/
 
-    void QtImageNodeData::setImage(QImage arg){
-        thisImage = std::move( arg );
-        thisFlags.set<ImageNodeDataState::ImageChanged>();
+    QtImageNodeWrap::QtImageNodeWrap(QSGNode * arg) {
+
+        /* 设置顶点着色器和片段着色器 */
+        auto varMaterial = sstd_new<this_private::ImageMaterial>();
+        this->setMaterial (varMaterial);
+        this->setFlag ( QSGNode::OwnsMaterial, true );
+
+        /* 设置顶点数据 */
+        auto *varGeometry = sstd_new<this_private::ImageGeometry>();
+        this->setGeometry (varGeometry);
+        this->setFlag ( QSGNode::OwnsGeometry );
+
+        /*加入父项*/
+        arg->appendChildNode (this);
+        this->setFlag ( OwnedByParent );
     }
 
-       void QtImageNodeData::clearAllChange(){
-           thisFlags.clearAll ();
-       }
-
     QtImageNode::QtImageNode(std::shared_ptr<QtImageNodeData> arg) :thisData{std::move(arg)} {
+        thisDrawImage = sstd_new<QtImageNodeWrap>(this);
+        this->setFlag ( OwnedByParent );
+    }
 
+    void QtImageNodeWrap::updateImage(const QImage & arg){
+        auto varMaterial = static_cast<this_private::ImageMaterial *>( this->material () );
+        varMaterial->updateToQImage (arg);
+        this->markDirty ( DirtyMaterial );
+    }
+
+    void QtImageNodeWrap::updateImageSize(const QSizeF & arg){
+        auto varGeometry = static_cast<this_private::ImageGeometry *>( this->geometry ());
+        varGeometry->updateSize (arg);
+        this->markDirty ( DirtyGeometry );
+    }
+
+    bool QtImageNodeData::setImage(QImage arg){
+        thisImage = std::move( arg );
+        thisFlags.set<ImageNodeDataState::ImageChanged>();
+        return true;
+    }
+
+    bool QtImageNodeData::setImageSize(const QSizeF & arg){
+        if(arg == thisImageSize){
+            return false;
+        }
+        thisImageSize =arg;
+        thisFlags.set<ImageNodeDataState::ImageSizeChanged>();
+        return true;
+    }
+
+    void QtImageNodeData::clearAllChange(){
+        thisFlags.clearAll ();
     }
 
     void QtImageNode::updateTheNode() {
 
         if(thisData->testChanged<ImageNodeDataState::ImageChanged>()){
+              thisDrawImage->updateImage ( thisData->getImage () );
+        }
 
+        if( thisData->testChanged<ImageNodeDataState::ImageSizeChanged>() ){
+            thisDrawImage->updateImageSize ( thisData->getImageSize () );
         }
 
         thisData->clearAllChange ();
     }
-
 
 }/*namespace sstd*/
 
