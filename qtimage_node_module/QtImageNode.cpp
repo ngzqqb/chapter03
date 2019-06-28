@@ -1,6 +1,6 @@
 ﻿#include "QtImageNode.hpp"
 
-#define THE_DEBUG
+//#define THE_DEBUG
 
 namespace sstd {
 
@@ -32,7 +32,7 @@ namespace sstd {
             inline ImageMaterial() {
 #if defined(_DEBUG)
                 thisImage = QImage{ 1,1,QImage::Format_RGB888 };
-                thisImage.fill(QColor(255, 1, 1, 255));
+                thisImage.fill(QColor(1, 255, 1, 255));
 #endif
             }
         private:
@@ -54,12 +54,12 @@ namespace sstd {
 in vec2 qt_TexCoord;
 
 layout(location = 0) uniform sampler2D qt_Texture;
-out vec4 fragColor          ;
+out vec4 fragColor                               ;
 
 void main() {
-    //fragColor = texture2D(qt_Texture, qt_TexCoord);
-fragColor = vec4(1,0,0,1) ;
+    fragColor = texture2D(qt_Texture, qt_TexCoord);
 }
+
 /* Src/qtdeclarative/src/quick/scenegraph/shaders/opaquetexture.frag */
 )--------";
 
@@ -71,8 +71,8 @@ fragColor = vec4(1,0,0,1) ;
 #version 460
 
 layout(location = 1) uniform mat4 qt_Matrix   ;
-layout(location = 2) in vec4 qt_VertexPosition;
-layout(location = 3) in vec2 qt_VertexTexCoord;
+layout(location = 0) in vec4 qt_VertexPosition;
+layout(location = 1) in vec2 qt_VertexTexCoord;
 
 out vec2 qt_TexCoord;
 
@@ -175,6 +175,7 @@ void main() {
                     varData2.tx = 1; varData2.ty = 0;
                     varData3.tx = 1; varData3.ty = 1;
                 }
+                this->setDrawingMode(QSGGeometry::DrawTriangleStrip);
             }
 
             inline void updateSize(const QSizeF & arg) {
