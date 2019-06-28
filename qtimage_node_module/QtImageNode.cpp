@@ -56,10 +56,11 @@ namespace sstd {
 in vec2 qt_TexCoord;
 
 layout(location = 0) uniform sampler2D qt_Texture;
+layout(location = 2) uniform float qt_Opacity    ;
 out vec4 fragColor                               ;
 
 void main() {
-    fragColor = texture2D(qt_Texture, qt_TexCoord);
+    fragColor = texture2D(qt_Texture, qt_TexCoord) * qt_Opacity;
 }
 
 /* Src/qtdeclarative/src/quick/scenegraph/shaders/opaquetexture.frag */
@@ -104,6 +105,7 @@ void main() {
                 constructThisGL();
                 /* this->program ()->bind () ;  */
                 this->program()->setUniformValue(1, state.combinedMatrix());
+                this->program ()->setUniformValue(2,state.opacity());
                 USING_SSTD_GLEW;
                 glActiveTexture(GL_TEXTURE0);
                 glBindTexture(GL_TEXTURE_2D, thisImageMaterial->thisQImageTexture);

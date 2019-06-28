@@ -13,10 +13,18 @@ StyledApplicationWindow {
     height: 360 ;
     id : idRoot ; 
 
+    Label{
+        anchors.centerIn: parent
+        text: qsTr("Good!")
+        font.bold: true
+        font.pixelSize: parent.height * 0.8
+    }
+
     QtImageItem{
         id : idQtImageItem
         anchors.fill: parent
         property bool drawImageSelect: false
+        opacity:0.5
 
         Timer{
             interval: 1000 ;
