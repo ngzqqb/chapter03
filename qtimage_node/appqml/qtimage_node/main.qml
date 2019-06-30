@@ -11,7 +11,7 @@ StyledApplicationWindow {
 
     width: 512 ;
     height: 360 ;
-    id : idRoot ; 
+    id : idRoot ;
 
     Label{
         anchors.centerIn: parent

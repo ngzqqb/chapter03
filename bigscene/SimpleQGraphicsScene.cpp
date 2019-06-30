@@ -73,7 +73,7 @@ namespace sstd {
                 if (varI.isEmpty()) {
                     continue;
                 }
-                const QSizeF varTargetSize{ 
+                const QSizeF varTargetSize{
                     varI.width() * varDevicePixelRatio ,
                     varI.height() * varDevicePixelRatio
                 };
@@ -144,19 +144,3 @@ namespace sstd {
 
 
 //逻辑错误 TODO：....
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

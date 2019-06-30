@@ -8,4 +8,3 @@ namespace sstd {
     }
 
 }/*namespace sstd*/
-
