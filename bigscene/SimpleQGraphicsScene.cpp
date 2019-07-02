@@ -24,7 +24,7 @@ namespace sstd {
         inline virtual void advance(int arg) override{
             if( arg == 0 ){
                 /*about to advane ...*/
-                thisNeedAdvance = (0!=(thisRandom(thisRandGen)&3));
+                thisNeedAdvance = (0==(thisRandom(thisRandGen)&3));
             }else{
                 /*advance ...*/
                 if(!thisNeedAdvance){
