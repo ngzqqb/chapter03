@@ -25,7 +25,6 @@ namespace sstd {
         connect(this, &QQuickItem::heightChanged, [this]() {thisScene.setSceneRect(0, 0, width(), height()); });
         connect(this, &QQuickItem::widthChanged, [this]() {thisScene.setSceneRect(0, 0, width(), height()); });
         connect(&thisScene, &QGraphicsScene::changed, this, &SimpleQGraphicsSceneView::updateViewPort);
-
     }
 
     void SimpleQGraphicsSceneView::updateViewPort(QList<QRectF> arg) {
@@ -92,6 +91,8 @@ namespace sstd {
     void SimpleQGraphicsSceneView::updateViewPortSize() {
         thisVisibleView->setOffsetX(thisSceneViewPort->getX());
         thisVisibleView->setOffsetY(thisSceneViewPort->getY());
+        thisVisibleView->setWidth(thisSceneViewPort->getWidth());
+        thisVisibleView->setHeight(thisSceneViewPort->getHeight());
         updateViewPort({ thisSceneViewPort->getViewPortRect() });
     }
 
@@ -142,5 +143,10 @@ namespace sstd {
 
 }/* namespace sstd */
 
+inline static void registerThis() {
+    qmlRegisterType<sstd::SimpleQGraphicsSceneView>("sstd.simple.scene", 1, 0, "SimpleQGraphicsSceneView");
+    qmlRegisterType<sstd::SimpleQGraphicsSceneViewPort>();
+    qmlProtectModule("sstd.simple.scene", 1);
+}
+Q_COREAPP_STARTUP_FUNCTION(registerThis)
 
-//逻辑错误 TODO：....

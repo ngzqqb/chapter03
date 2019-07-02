@@ -10,9 +10,6 @@ CONFIG(debug,debug|release){
 
 SOURCES += $$PWD/main.cpp
 
-SOURCES += $$PWD/SimpleRectanglesWorld.cpp
-HEADERS += $$PWD/SimpleRectanglesWorld.hpp
-
 SOURCES += $$PWD/SimpleQGraphicsScene.cpp
 HEADERS += $$PWD/SimpleQGraphicsScene.hpp
 
@@ -42,8 +39,8 @@ CONFIG(debug,debug|release){
 }
 
 QMLSOURCES += $$PWD/appqml/bigscene/main.qml
-QMLSOURCES += $$PWD/appqml/bigscene/Files/Rectangles.qml
 QMLSOURCES += $$PWD/appqml/bigscene/Files/PrivateBasic.qml
+QMLSOURCES += $$PWD/appqml/bigscene/Files/SimpleGraphicsScene.qml
 
 lupdate_only{
     SOURCES += $$QMLSOURCES
