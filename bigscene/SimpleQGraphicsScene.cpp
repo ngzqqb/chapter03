@@ -16,15 +16,52 @@ namespace sstd {
         this->setParentItem(arg);
     }
 
+    class RectItem : public QGraphicsRectItem {
+        bool thisNeedAdvance{false};
+        std::mt19937 thisRandGen{ std::random_device{}() };
+        std::uniform_int_distribution<int> thisRandom{127,255};
+    public:
+        inline virtual void advance(int arg) override{
+            if( arg == 0 ){
+                /*about to advane ...*/
+                thisNeedAdvance = (0!=(thisRandom(thisRandGen)&3));
+            }else{
+                /*advance ...*/
+                if(!thisNeedAdvance){
+                    return;
+                }
+                randomSetPen();
+            }
+        }
+        inline void randomSetPen(){
+            this->setPen( QColor(thisRandom(thisRandGen),
+                                 thisRandom(thisRandGen),
+                                 thisRandom(thisRandGen),
+                                 255) );
+        }
+        template<typename ... Args >
+        inline RectItem(Args && ... args):
+            QGraphicsRectItem(std::forward<Args>(args)...){
+            randomSetPen();
+        }
+    private:
+        sstd_class(RectItem);
+    };
+
     inline static void constructTestScene(QGraphicsScene * arg){
         arg->setBackgroundBrush(QColor(123,123,123,255));
         for( int argI =0;argI < (1024/13) ; ++argI ){
             for( int argJ = 0;argJ<(1024/13) ;++argJ ){
                 auto varX = argI * 13;
                 auto varY = argJ *13;
-                arg->addRect( varX,varY,10,10 );
+                arg->addItem( sstd_new<RectItem>(varX,varY,10,10) );
             }
         }
+        auto varTimer = sstd_virtual_new<QTimer>(arg);
+        varTimer->connect(varTimer,&QTimer::timeout,[arg](){
+            arg->advance();
+        });
+        varTimer->start( 1000 );
     }
 
     SimpleQGraphicsSceneView::SimpleQGraphicsSceneView() {
@@ -86,12 +123,12 @@ namespace sstd {
                 }
                 const QSizeF varTargetSize{
                     varI.width() * varDevicePixelRatio ,
-                    varI.height() * varDevicePixelRatio
+                            varI.height() * varDevicePixelRatio
                 };
                 auto varTargetX = (varI.x() - thisSceneViewPort->getX()) * varDevicePixelRatio;
                 auto varTargetY = (varI.y() - thisSceneViewPort->getY()) * varDevicePixelRatio;
                 thisScene.render(&varPainter, { varTargetX,varTargetY,varTargetSize.width(),varTargetSize.height() },
-                    varI);
+                                 varI);
             }
         }
 
