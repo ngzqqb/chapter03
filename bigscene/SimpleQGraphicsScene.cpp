@@ -16,6 +16,17 @@ namespace sstd {
         this->setParentItem(arg);
     }
 
+    inline static void constructTestScene(QGraphicsScene * arg){
+        arg->setBackgroundBrush(QColor(123,123,123,255));
+        for( int argI =0;argI < (1024/13) ; ++argI ){
+            for( int argJ = 0;argJ<(1024/13) ;++argJ ){
+                auto varX = argI * 13;
+                auto varY = argJ *13;
+                arg->addRect( varX,varY,10,10 );
+            }
+        }
+    }
+
     SimpleQGraphicsSceneView::SimpleQGraphicsSceneView() {
         thisSceneViewPort = sstd_new<SimpleQGraphicsSceneViewPort>(this);
         thisVisibleView = sstd_new<VisibleSimpleQGraphicsSceneViewPort>(this);
@@ -25,6 +36,7 @@ namespace sstd {
         connect(this, &QQuickItem::heightChanged, [this]() {thisScene.setSceneRect(0, 0, width(), height()); });
         connect(this, &QQuickItem::widthChanged, [this]() {thisScene.setSceneRect(0, 0, width(), height()); });
         connect(&thisScene, &QGraphicsScene::changed, this, &SimpleQGraphicsSceneView::updateViewPort);
+        constructTestScene(&this->thisScene);
     }
 
     void SimpleQGraphicsSceneView::updateViewPort(QList<QRectF> arg) {
