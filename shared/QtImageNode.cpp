@@ -32,7 +32,7 @@ namespace sstd {
             }
             inline ImageMaterial() {
 #if defined(_DEBUG)
-                thisImage = QImage{ 1,1,QImage::Format_RGB888 };
+                thisImage = QImage{ 1,1,sstd::opengl_utility::defaultQImageFormat() };
                 thisImage.fill(QColor(1, 255, 1, 255));
 #endif
             }
