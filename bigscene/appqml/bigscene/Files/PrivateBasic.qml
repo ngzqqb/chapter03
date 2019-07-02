@@ -22,5 +22,4 @@ StyledWindow {
         idRoot.destroy();
     }
 
-
 }
